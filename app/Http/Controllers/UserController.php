@@ -140,7 +140,7 @@ class UserController extends Controller
 
         // Tạo mới user với các dữ liệu tương ứng với dữ liệu được gán trong $data
 
-        echo"success create user";
+        
         return redirect()->route('user.list');
     }
     //lab: thục hiện chwusc năng chỉnh sửa , method: put , có dữ liệu của user để chỉnh sửa

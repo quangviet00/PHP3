@@ -187,6 +187,7 @@
 
                 </a>
               </div>
+              <a href="/auth/logout">Đăng xuất</a>
             </div>
 
             <!-- SidebarSearch Form -->

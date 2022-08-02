@@ -43,13 +43,13 @@ Route::middleware('auth')->prefix('/user')->name('user.')->group(function(){
 
 });
 //position
-Route::prefix('/position')->name('position')->group(function(){
+Route::middleware('auth')->prefix('/position')->name('position')->group(function(){
     Route::get('/', [PositionController::class ,'index'])->name('list');
 });
 //room
-Route::get('/room', [RoomController::class ,'index'])->name('room.list')->middleware('auth');
+Route::middleware('auth')->get('/room', [RoomController::class ,'index'])->name('room.list')->middleware('auth');
 // product
-Route::prefix('/product')->name('product.')->group(function(){
+Route::middleware('auth')->prefix('/product')->name('product.')->group(function(){
     Route::get('/', [ProductController::class ,'index'])->name('list');
     //add
     Route::get('/add',[ProductController::class,'add'])->name('add');
@@ -67,9 +67,19 @@ Route::prefix('/product')->name('product.')->group(function(){
 Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function(){
     Route::get('/login',[AuthController::class,'getLogin'])->name('login');
     Route::post('/login',[AuthController::class,'postLogin'])->name('login');
+    // đăng ký
+
+    // đăng xuất
+    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+
 
 });
 //logout
 Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 
+Route::prefix('/auth')->name('auth.')->group(function(){
+    Route::get('/register',[AuthController::class,'getRegister'])->name('register');
+    Route::post('/register',[AuthController::class,'postRegister'])->name('register');
+});
