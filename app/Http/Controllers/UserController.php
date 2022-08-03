@@ -30,7 +30,7 @@ class UserController extends Controller
         $room = Room::find(3);
         $roomChildren = $room->children;
 
-         $users=User::select('id', 'name', 'birthday','avatar', 'user_name', 'email','room_id')
+         $users=User::select('id', 'name', 'birthday','avatar', 'user_name', 'email','room_id','role')
          ->where('id','>',3)
          ->with('room')
 
@@ -71,6 +71,7 @@ class UserController extends Controller
         $users->user_name = $request->user_name;
         $users->email = $request->email;
         $users->room_id = $request->room_id;
+        $users->role = $request->role;
 
 
         if($request->hasFile('avatar')){
@@ -140,7 +141,7 @@ class UserController extends Controller
 
         // Tạo mới user với các dữ liệu tương ứng với dữ liệu được gán trong $data
 
-        
+
         return redirect()->route('user.list');
     }
     //lab: thục hiện chwusc năng chỉnh sửa , method: put , có dữ liệu của user để chỉnh sửa

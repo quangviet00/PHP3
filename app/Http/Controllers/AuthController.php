@@ -74,5 +74,13 @@ class AuthController extends Controller
         $user->save();
         return redirect()->route('auth.login');
     }
+    //update role
+    public function getUpdateRole($id)
+    {
+        $user = User::find($id);
+        $user->role = 1;
+        $user->save();
+        return redirect()->route('user.list');
+    }
 
 }

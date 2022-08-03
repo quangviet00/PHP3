@@ -23,9 +23,11 @@
             <th>Email</th>
             <th>Avatar</th>
             <th>Phòng Ban</th>
+            <th>Quyền</th>
             @if(Auth::user()->role == 1)
             <th>Thao Tác</th>
             @endif
+
         </tr>
 
     </thead>
@@ -41,6 +43,13 @@
         <td>{{$user->email}}</td>
         <td><img src="{{asset($user->avatar)}}"  width="100px" height="100px" alt=""></td>
         <td>{{$user->room->name}}</td>
+        <td><select name="{{$user->role}}" id="">
+            <option value="1" {{$user->role == 1 ? 'selected' : ''}}>Admin</option>
+            <option value="2" {{$user->role == 2 ? 'selected' : ''}}>Nhân Viên</option>
+            <option value="3" {{$user->role == 3 ? 'selected' : ''}}>Khách Hàng</option>
+
+        </select></td>
+
         @if(Auth::user()->role == 1)
         <td>
             <a href="{{route('user.edit',$user->id)}}" class="btn btn-primary"><i class="fa fa-edit"></i> Sửa</a>

@@ -72,6 +72,9 @@ Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function(){
     // đăng xuất
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
+    //update role
+    Route::get('/update-role/{id}',[AuthController::class,'getUpdateRole'])->name('update-role');
+
 
 
 });
