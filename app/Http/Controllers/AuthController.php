@@ -29,6 +29,13 @@ class AuthController extends Controller
             return redirect()->back()->with('thongbao', 'Đăng nhập không thành công');
         }
 
+        //phân quyền admin với role = 0 mới đăng nhập được
+        // if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 0])) {
+        //     return redirect()->route('admin.index');
+        // } else {
+        //     return redirect()->back()->with('thongbao', 'Đăng nhập không thành công');
+        // }
+
 
 
 

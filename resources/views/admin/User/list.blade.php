@@ -5,7 +5,11 @@
 @section('content-title','Quản Lý Người Dùng')
 
 @section('content')
+{{-- <a href="{{route('user.add')}}">Thêm</a> --}}
+{{-- chỉ user có role = 1 mới được thêm --}}
+@if(Auth::user()->role == 1)
 <a href="{{route('user.add')}}">Thêm</a>
+@endif
 
 
 <table class="table table-hover">
@@ -19,7 +23,9 @@
             <th>Email</th>
             <th>Avatar</th>
             <th>Phòng Ban</th>
+            @if(Auth::user()->role == 1)
             <th>Thao Tác</th>
+            @endif
         </tr>
 
     </thead>
@@ -35,15 +41,19 @@
         <td>{{$user->email}}</td>
         <td><img src="{{asset($user->avatar)}}"  width="100px" height="100px" alt=""></td>
         <td>{{$user->room->name}}</td>
+        @if(Auth::user()->role == 1)
         <td>
             <a href="{{route('user.edit',$user->id)}}" class="btn btn-primary"><i class="fa fa-edit"></i> Sửa</a>
       <form action="{{route('user.delete',$user->id)}}" method="post">
         @csrf
         @method('delete')
-<button class="btn btn-danger "> <i class="fa fa-trash"></i> Xóa</button>
+        <button class="btn btn-danger "> <i class="fa fa-trash"></i> Xóa</button>
+
         {{-- <a href="/user/delete/{{ $user->id }}" class="btn btn-danger" ><i class="fa fa-trash"></i>Delete</a> --}}
 
       </form>
+        </td>
+        @endif
 
 
         </tr>

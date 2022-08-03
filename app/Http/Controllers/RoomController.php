@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\User;
 
 
 class RoomController extends Controller
@@ -14,7 +15,7 @@ class RoomController extends Controller
         if ($keyword = request('keyword')) {
             $rooms = Room::with('users')->where('name','like','%'.$keyword.'%')->paginate(5);
         }
-        
+
 
         return view('admin.room.list', ['room_list' => $rooms]);
     }

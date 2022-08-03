@@ -28,7 +28,7 @@
         <td>{{$item->name}}</td>
         <td>
             <ul>
-                @foreach($item->user as $user)
+                @foreach($item->user_list as $user)
                 <li>{{$user->name}}</li>
                 @endforeach
             </ul>
@@ -38,7 +38,7 @@
       <form action="{{route('room.delete',$item->id)}}" method="post">
         @csrf
         @method('delete')
-<button class="btn btn-danger "> <i class="fa fa-trash"></i> Xóa</button>
+        <button class="btn btn-danger "> <i class="fa fa-trash"></i> Xóa</button>
 
         </form>
 
