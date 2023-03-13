@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// http://localhost:8000/api/test-api
+Route::get('test-api',function(){
+    $a = 'test';
+    return response()->json([
+        'success' => true,
+        'data' => $a,
+        'status' => 200
+    ],500);
+
+});

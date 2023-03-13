@@ -19,15 +19,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'user_name',
-        'birthday',
-        'phone',
-        'role',
-        'status',
-        'room_id',
+            'ten', 
+            'email',  
+            'matkhau', 
+            'quyen', 
+            'trang thai	'
     ];
 
     /**
@@ -36,20 +32,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'matkhau',
+      'remember_token',
     ];
+   
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+   
     //định nghĩa quan hệ 1 user thuộc 1 room
-    public function room(){
-        return $this->belongsTo(Room::class,'room_id','id');
-    }
+ 
 }

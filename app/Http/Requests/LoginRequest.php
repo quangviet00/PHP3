@@ -24,6 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
+            
             'email' => 'required|email|min:6|max:32',
             'password' => 'required|min:6',
 
@@ -37,8 +38,8 @@ class LoginRequest extends FormRequest
             'email.email' => 'Email phải đúng định dạng',
             'email.min' => 'Email must be at least 6 characters',
             'email.max' => 'Email must be at most 32 characters',
-            'password.required' => 'Password bắt buộc nhập',
-            'password.min' => 'Password must be at least 6 characters',
+            'password.required' => 'password bắt buộc nhập',
+            'password.min' => 'password must be at least 6 characters',
         ];
     }
 }

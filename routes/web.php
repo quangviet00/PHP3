@@ -8,7 +8,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthtController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,66 +26,49 @@ use App\Http\Controllers\AuthController;
 
 
 
+Route::get('/', [ClientController::class ,'showNew']);
 
+Route::middleware('auth')->prefix('/admin')->name('admin.')->group(function(){
 
-Route::middleware('auth')->prefix('/user')->name('user.')->group(function(){
-    Route::get('/', [UserController::class ,'index'])->name('list');
-
-    //delete user
-    Route::delete('/delete/{id}',[UserController::class,'delete'])->name('delete');
-    Route::post('/store',[UserController::class,'store'])->name('store');
-    //add user
-    Route::get('/add',[UserController::class,'add'])->name('add');
-    Route::post('/store', [UserController::class, 'store'])->name('store');
-
-    //update user
-    Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit');
-    Route::post('/update/{id}',[UserController::class,'update'])->name('update');
-
-
-
+    Route::get('/user', [UserController::class ,'index'])->name('user.list');
+    Route::delete('/user/delete/{id}', [UserController::class ,'delete'])->name('user.delete');
+    //news
+   Route::get('/new',[NewsController::class,'index'])->name('new');
+   Route::get('/new/quanlydangtin',[NewsController::class,'quanlydangtin'])->name('new/quanlydangtin');
+   Route::get('/new/create',[NewsController::class,'create'])->name('new.create');
+   Route::get('/new/edit/{id}',[NewsController::class,'edit'])->name('new.edit');
+   Route::get('/new/detail/{id}',[NewsController::class,'detail'])->name('new.detail');
+   Route::post('/new/store',[NewsController::class,'store'])->name('new.store');
+   Route::put('/new/update/{new}',[NewsController::class,'update'])->name('new.update');
+   Route::delete('/new/delete/{id}',[NewsController::class,'delete'])->name('new.delete');
+   Route::get('/new/status/{new}', [NewsController::class, 'status'])->name('new.status');
 });
-//position
-Route::middleware('auth')->prefix('/position')->name('position')->group(function(){
-    Route::get('/', [PositionController::class ,'index'])->name('list');
-});
-//room
-Route::middleware('auth')->get('/room', [RoomController::class ,'index'])->name('room.list')->middleware('auth');
-// product
-Route::middleware('auth')->prefix('/product')->name('product.')->group(function(){
-    Route::get('/', [ProductController::class ,'index'])->name('list');
-    //add
-    Route::get('/add',[ProductController::class,'add'])->name('add');
-    Route::post('/store', [ProductController::class, 'store'])->name('store');
-    //delete
-    Route::delete('/delete/{id}',[ProductController::class,'delete'])->name('delete');
-    //update
-    Route::get('/edit/{id}',[ProductController::class,'edit'])->name('edit');
-    Route::post('/update/{id}',[ProductController::class,'update'])->name('update');
-    Route::get('/update-status/{id}',[ProductController::class,'update_status'])->name('update-status');
 
-
-});
-//login
-Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function(){
-    Route::get('/login',[AuthController::class,'getLogin'])->name('login');
-    Route::post('/login',[AuthController::class,'postLogin'])->name('login');
-    // đăng ký
-
-    // đăng xuất
-    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-
-    //update role
-    Route::get('/update-role/{id}',[AuthController::class,'getUpdateRole'])->name('update-role');
-
-
+Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function () {
+    Route::get('/login', [AuthtController::class, 'getLogin'])->name('getLogin');
+    Route::post('/login', [AuthtController::class, 'postLogin'])->name('postLogin');
 
 });
 //logout
-Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth');
-
-
+Route::get('/auth/logout', [AuthtController::class, 'logout'])->middleware('auth');
 Route::prefix('/auth')->name('auth.')->group(function(){
-    Route::get('/register',[AuthController::class,'getRegister'])->name('register');
-    Route::post('/register',[AuthController::class,'postRegister'])->name('register');
+    Route::get('/register',[AuthtController::class,'getRegister'])->name('getRegister');
+    Route::post('/register',[AuthtController::class,'postRegister'])->name('postRegister');
 });
+// Route::prefix('/admin')->name('admin.')->group(function(){
+//     Route::get('/user', [UserController::class ,'index'])->name('user.list');
+//     Route::delete('/user/delete/{id}', [UserController::class ,'delete'])->name('user.delete');
+//     //news
+//    Route::get('/new',[NewsController::class,'index'])->name('new');
+//    Route::get('/new/quanlydangtin',[NewsController::class,'quanlydangtin'])->name('new/quanlydangtin');
+//    Route::get('/new/create',[NewsController::class,'create'])->name('new.create');
+//    Route::get('/new/edit/{id}',[NewsController::class,'edit'])->name('new.edit');
+//    Route::get('/new/detail/{id}',[NewsController::class,'detail'])->name('new.detail');
+//    Route::post('/new/store',[NewsController::class,'store'])->name('new.store');
+//    Route::put('/new/update/{new}',[NewsController::class,'update'])->name('new.update');
+//    Route::delete('/new/delete/{id}',[NewsController::class,'delete'])->name('new.delete');
+//    Route::get('/new/status/{new}', [NewsController::class, 'status'])->name('new.status');
+// });
+
+
+

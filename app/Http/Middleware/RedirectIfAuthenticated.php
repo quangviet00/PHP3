@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 // return redirect(RouteServiceProvider::HOME);
                 // Nếu đã đăng nhập mà có middleware guest thì bị đẩy về ds users
-                return redirect()->route('user.list');
+                return redirect()->route('admin.user.list');
             }
         }
 
